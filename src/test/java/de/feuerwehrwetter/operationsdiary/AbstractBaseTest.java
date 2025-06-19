@@ -1,9 +1,13 @@
 package de.feuerwehrwetter.operationsdiary;
 
+import de.feuerwehrwetter.operationsdiary.persistence.file.FilePersitenceService;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @SpringBootTest
-@ContextConfiguration(classes = MockConfiguration.class)
 public abstract class AbstractBaseTest {
+
+    @MockitoBean
+    FilePersitenceService filePersitenceService;
+
 }

@@ -37,3 +37,4 @@ timesheet.json
 
 ### UI ###
 /src/main/resources/public
+/operations-diary.json
