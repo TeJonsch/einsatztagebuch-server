@@ -1,4 +1,6 @@
 package de.feuerwehrwetter.operationsdiary.web.ui.model;
 
-public record OperationsDiaryDto() {
+import java.util.List;
+
+public record OperationsDiaryDto(List<DiaryEntryDto> entries) {
 }

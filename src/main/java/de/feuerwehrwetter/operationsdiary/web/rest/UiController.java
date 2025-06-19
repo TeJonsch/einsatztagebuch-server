@@ -15,7 +15,7 @@ public class UiController {
     private final UiService uiService;
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/timesheet")
+    @GetMapping("/operations-diary")
     OperationsDiaryDto getOperationsDiaryDto() {
         return uiService.getDto();
     }
