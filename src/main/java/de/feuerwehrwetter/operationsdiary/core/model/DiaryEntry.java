@@ -6,7 +6,7 @@ import java.util.UUID;
 /**
  * An entry of the operations diary
  *
- * @param uuid              The unique identifier - created by this service
+ * @param uuid              the unique identifier - created by this service
  * @param creationTimestamp creatino timestamp of the entry - created by this service
  * @param messageTimestamp  timestamp when the message occurred - must be in the past
  * @param message           the message

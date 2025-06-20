@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Top level model for the operations diary
  *
- * @param entries the diary entry list
+ * @param operations the fire department operations which are documented
  */
-public record OperationsDiary(List<DiaryEntry> entries) {
+public record OperationsDiary(List<Operation> operations) {
 }

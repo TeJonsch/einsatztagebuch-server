@@ -2,6 +2,7 @@ package de.feuerwehrwetter.operationsdiary.web.rest;
 
 import de.feuerwehrwetter.operationsdiary.core.OperationsDiaryHolder;
 import de.feuerwehrwetter.operationsdiary.core.model.DiaryEntry;
+import de.feuerwehrwetter.operationsdiary.core.model.Operation;
 import de.feuerwehrwetter.operationsdiary.core.model.OperationsDiary;
 import de.feuerwehrwetter.operationsdiary.persistence.file.FilePersitenceService;
 import de.feuerwehrwetter.operationsdiary.web.ui.UiService;
@@ -39,7 +40,7 @@ public class UiController {
                 newEntry("LtS sagt was!", 24, 24),
                 newEntry("Noch was", 26, 26)
         );
-        OperationsDiaryHolder.setOperationsDiary(new OperationsDiary(diaryEntries));
+        OperationsDiaryHolder.setOperationsDiary(new OperationsDiary(List.of(new Operation(UUID.randomUUID(), "ABC", LocalDateTime.now(), "F0 - Kleinbrand", diaryEntries))));
         filePersitenceService.writeToFile();
     }
 

@@ -34,9 +34,9 @@ class UiServiceTest extends AbstractBaseTest {
 
         final OperationsDiaryDto dto = uiService.getDto();
 
-        assertThat(dto.entries()).hasSize(1);
+        assertThat(dto.operationDtos()).hasSize(1);
 
-        final DiaryEntryDto entry = dto.entries().getFirst();
+        final DiaryEntryDto entry = dto.operationDtos().getFirst();
         assertThat(entry.uuid()).isEqualTo(UUID.toString());
         assertThat(entry.creationTimestamp()).isEqualTo(CREATION_TIMESTAMP_STRING);
         assertThat(entry.messageTimestamp()).isEqualTo(MESSAGE_TIMESTAMP_STRING);
