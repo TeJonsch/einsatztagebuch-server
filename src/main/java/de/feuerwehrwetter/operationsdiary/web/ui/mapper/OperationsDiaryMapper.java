@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 /**
  * Mapstruct {@link Mapper} to map the {@link de.feuerwehrwetter.operationsdiary.core.model.OperationsDiary}
  */
-@Mapper
+@Mapper(uses = LocalDateTimeMapper.class)
 public interface OperationsDiaryMapper {
 
     /**

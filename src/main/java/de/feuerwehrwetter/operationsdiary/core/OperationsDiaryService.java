@@ -1,5 +1,6 @@
 package de.feuerwehrwetter.operationsdiary.core;
 
+import de.feuerwehrwetter.operationsdiary.core.model.Operation;
 import de.feuerwehrwetter.operationsdiary.persistence.file.FilePersitenceService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -18,5 +19,10 @@ public class OperationsDiaryService {
     @PostConstruct
     void loadFromFile() throws IOException {
         filePersitenceService.loadFromFile();
+    }
+
+    public void create(final Operation operation) throws IOException {
+        OperationsDiaryHolder.getOperationsDiary().operations().add(operation);
+        filePersitenceService.writeToFile();
     }
 }

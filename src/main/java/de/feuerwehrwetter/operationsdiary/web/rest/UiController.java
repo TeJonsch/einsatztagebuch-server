@@ -6,11 +6,13 @@ import de.feuerwehrwetter.operationsdiary.core.model.Operation;
 import de.feuerwehrwetter.operationsdiary.core.model.OperationsDiary;
 import de.feuerwehrwetter.operationsdiary.persistence.file.FilePersitenceService;
 import de.feuerwehrwetter.operationsdiary.web.ui.UiService;
+import de.feuerwehrwetter.operationsdiary.web.ui.model.CreateOperationDto;
 import de.feuerwehrwetter.operationsdiary.web.ui.model.OperationsDiaryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -33,8 +35,14 @@ public class UiController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/operations-diary")
+    OperationsDiaryDto createOperation(@RequestBody CreateOperationDto createOperationDto) throws IOException {
+        return uiService.createOperation(createOperationDto);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/operations-diary/debug")
-    void createDubugEntries() throws IOException {
+    void createDebugEntries() throws IOException {
         final List<DiaryEntry> diaryEntries = List.of(
                 newEntry("Hallo Herr EL....", 9, 2),
                 newEntry("LtS sagt was!", 24, 24),
