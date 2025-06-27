@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 @Mapper
 public class LocalDateTimeMapper {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm:ss");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 
     String toDto(LocalDateTime localDateTime) {
         return localDateTime.format(FORMATTER);

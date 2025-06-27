@@ -1,7 +1,6 @@
 package de.feuerwehrwetter.operationsdiary.persistence.file;
 
 import com.google.gson.Gson;
-import de.feuerwehrwetter.operationsdiary.core.OperationsDiaryHolder;
 import de.feuerwehrwetter.operationsdiary.core.config.OperationsDiaryProperties;
 import de.feuerwehrwetter.operationsdiary.core.model.OperationsDiary;
 import lombok.RequiredArgsConstructor;
@@ -23,29 +22,25 @@ public class FilePersitenceService {
     private final OperationsDiaryProperties properties;
     private final Gson gson;
 
-    public void loadFromFile() throws IOException {
+    public OperationsDiary loadFromFile() throws IOException {
         log.info("Loading operations diary file");
 
         createFileIfNotExists();
 
         final var operationsDiary = parseJson();
-        storeInHolder(operationsDiary);
+        return Objects.requireNonNullElseGet(operationsDiary, this::newEmptyOperationsDiary);
     }
 
-    public void writeToFile() throws IOException {
+    public void writeToFile(OperationsDiary operationsDiary) throws IOException {
         log.info("Writing operations diary file");
 
         try (final FileWriter writer = new FileWriter(properties.path().getFile())) {
-            gson.toJson(OperationsDiaryHolder.getOperationsDiary(), writer);
+            gson.toJson(operationsDiary, writer);
         }
     }
 
     private OperationsDiary parseJson() throws IOException {
         return gson.fromJson(new FileReader(properties.path().getFile()), OperationsDiary.class);
-    }
-
-    private void storeInHolder(final OperationsDiary operationsDiary) {
-        OperationsDiaryHolder.setOperationsDiary(Objects.requireNonNullElseGet(operationsDiary, this::newEmptyOperationsDiary));
     }
 
     private OperationsDiary newEmptyOperationsDiary() {

@@ -1,6 +1,5 @@
 package de.feuerwehrwetter.operationsdiary.web.rest;
 
-import de.feuerwehrwetter.operationsdiary.core.OperationsDiaryHolder;
 import de.feuerwehrwetter.operationsdiary.core.model.DiaryEntry;
 import de.feuerwehrwetter.operationsdiary.core.model.Operation;
 import de.feuerwehrwetter.operationsdiary.core.model.OperationsDiary;
@@ -36,8 +35,8 @@ public class UiController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/operations-diary")
-    OperationsDiaryDto createOperation(@RequestBody CreateOperationDto createOperationDto) throws IOException {
-        return uiService.createOperation(createOperationDto);
+    void createOperation(@RequestBody CreateOperationDto createOperationDto) throws IOException {
+        uiService.createOperation(createOperationDto);
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
@@ -48,8 +47,9 @@ public class UiController {
                 newEntry("LtS sagt was!", 24, 24),
                 newEntry("Noch was", 26, 26)
         );
-        OperationsDiaryHolder.setOperationsDiary(new OperationsDiary(List.of(new Operation(UUID.randomUUID(), "ABC", LocalDateTime.now(), "F0 - Kleinbrand", diaryEntries))));
-        filePersitenceService.writeToFile();
+
+        final OperationsDiary operationsDiary = new OperationsDiary(List.of(new Operation(UUID.randomUUID(), "ABC", LocalDateTime.now(), "F0 - Kleinbrand", diaryEntries)));
+        filePersitenceService.writeToFile(operationsDiary);
     }
 
     private static DiaryEntry newEntry(final String message, final int creationTsMinute, final int messageTsMinute) {

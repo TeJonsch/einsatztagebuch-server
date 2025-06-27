@@ -1,6 +1,5 @@
 package de.feuerwehrwetter.operationsdiary.web.ui;
 
-import de.feuerwehrwetter.operationsdiary.core.OperationsDiaryHolder;
 import de.feuerwehrwetter.operationsdiary.core.OperationsDiaryService;
 import de.feuerwehrwetter.operationsdiary.core.model.Operation;
 import de.feuerwehrwetter.operationsdiary.web.ui.mapper.OperationsDiaryMapper;
@@ -22,12 +21,10 @@ public class UiService {
     private final OperationsDiaryMapper operationsDiaryMapper;
 
     public OperationsDiaryDto getDto() {
-        return operationsDiaryMapper.toDto(OperationsDiaryHolder.getOperationsDiary());
+        return operationsDiaryMapper.toDto(operationsDiaryService.getOperationsDiary());
     }
 
-    public OperationsDiaryDto createOperation(final CreateOperationDto createOperationDto) throws IOException {
-        final Operation operation = new Operation(UUID.randomUUID(), createOperationDto.controlCenterId(), LocalDateTime.parse(createOperationDto.operationStartTimestamp()), createOperationDto.alarmKeyword(), List.of());
-        operationsDiaryService.create(operation);
-        return operationsDiaryMapper.toDto(OperationsDiaryHolder.getOperationsDiary());
+    public void createOperation(final CreateOperationDto createOperationDto) throws IOException {
+        operationsDiaryService.create(createOperationDto);
     }
 }
