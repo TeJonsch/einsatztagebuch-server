@@ -15,6 +15,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -71,6 +72,6 @@ class UiServiceTest extends AbstractBaseTest {
     private OperationsDiary createOperationsDiary() {
         final List<DiaryEntry> diaryEntries = List.of(new DiaryEntry(DIARY_UUID, CREATION_TIMESTAMP, MESSAGE_TIMESTAMP, MESSAGE));
         final Operation operation = new Operation(OPERATION_UUID, CONTROL_CENTER_ID, OPERATION_START_TIMESTAMP, ALARM_KEYWORD, diaryEntries);
-        return new OperationsDiary(List.of(operation));
+        return new OperationsDiary(Map.of(operation.uuid(), operation));
     }
 }

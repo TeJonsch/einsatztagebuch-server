@@ -27,10 +27,12 @@ public interface OperationsDiaryMapper {
     @Mapping(source = "operationsDiary.operations", target = "operations", qualifiedByName = "mapToList")
     OperationsDiaryDto toDto(OperationsDiary operationsDiary);
 
+    OperationDto toDto(Operation operation);
+
     @Named("mapToList")
-    static List<OperationDto> mapToList(Map<UUID, Operation> operationMap) {
+    default List<OperationDto> mapToList(Map<UUID, Operation> operationMap) {
         return operationMap.values().stream()
-                .map(OperationMapper.INSTANCE::mapToDto)
+                .map(this::toDto)
                 .toList();
     }
 }

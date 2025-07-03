@@ -28,12 +28,12 @@ public class UiController {
     }
 
     @PostMapping("/operations-diary")
-    void createOperation(@RequestBody CreateOperationDto createOperationDto) throws IOException {
+    void createOperation(@RequestBody CreateOperationDto createOperationDto) {
         uiService.createOperation(createOperationDto);
     }
 
-    @PostMapping("/operations-diary/{operationUuid}")
-    void createOperation(@PathVariable UUID operationUuid, @RequestBody CreateDiaryEntryDto createDiaryEntryDto) throws IOException {
+    @PostMapping("/operations-diary/{operationUuid}/diary-entries")
+    void createOperation(@PathVariable UUID operationUuid, @RequestBody CreateDiaryEntryDto createDiaryEntryDto) {
         uiService.createDiaryEntry(operationUuid, createDiaryEntryDto);
     }
 }
