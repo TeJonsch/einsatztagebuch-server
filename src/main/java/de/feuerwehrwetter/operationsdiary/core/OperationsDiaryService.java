@@ -60,10 +60,16 @@ public class OperationsDiaryService {
     }
 
     private static DiaryEntry createDiaryEntryFrom(final CreateDiaryEntryDto createDiaryEntryDto) {
+        // TODO: use MapStruct
         return new DiaryEntry(
                 UUID.randomUUID(),
                 LocalDateTime.now(),
                 LocalDateTime.parse(createDiaryEntryDto.messageTimestamp()),
-                createDiaryEntryDto.message());
+                createDiaryEntryDto.message(),
+                createDiaryEntryDto.messageType(),
+                createDiaryEntryDto.reporter(),
+                createDiaryEntryDto.receiver(),
+                createDiaryEntryDto.author()
+        );
     }
 }

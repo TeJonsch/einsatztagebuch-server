@@ -15,5 +15,9 @@ public record DiaryEntry(
         UUID uuid,
         LocalDateTime creationTimestamp,
         LocalDateTime messageTimestamp,
-        String message) {
+        String message,
+        MessageType messageType,
+        String reporter,
+        String receiver,
+        String author) {
 }

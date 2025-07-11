@@ -1,6 +1,7 @@
 package de.feuerwehrwetter.operationsdiary.web.rest;
 
 import de.feuerwehrwetter.operationsdiary.core.OperationsDiaryService;
+import de.feuerwehrwetter.operationsdiary.core.model.MessageType;
 import de.feuerwehrwetter.operationsdiary.core.model.Operation;
 import de.feuerwehrwetter.operationsdiary.web.ui.model.CreateDiaryEntryDto;
 import de.feuerwehrwetter.operationsdiary.web.ui.model.CreateOperationDto;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -28,11 +28,21 @@ public class UiDebugController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/operations-diary/debug")
-    void createDebugEntries() throws IOException {
+    void createDebugEntries() {
         final Operation operation = operationsDiaryService.create(new CreateOperationDto("1234542", getFormattedTimestamp(), "F0"));
-        operationsDiaryService.create(operation.uuid(), new CreateDiaryEntryDto(getFormattedTimestamp(), "Doch Schlimmm 7!"));
-        operationsDiaryService.create(operation.uuid(), new CreateDiaryEntryDto(getFormattedTimestamp(), "Mach was"));
-        operationsDiaryService.create(operation.uuid(), new CreateDiaryEntryDto(getFormattedTimestamp(), "Jau"));
+        operationsDiaryService.create(operation.uuid(), newCreateDiaryEntryDto("Doch Schlimmm 7!"));
+        operationsDiaryService.create(operation.uuid(), newCreateDiaryEntryDto("Alles paletti"));
+        operationsDiaryService.create(operation.uuid(), newCreateDiaryEntryDto("Huuup"));
+    }
+
+    private static CreateDiaryEntryDto newCreateDiaryEntryDto(final String message) {
+        return new CreateDiaryEntryDto(
+                message,
+                MessageType.TASK,
+                "reporter",
+                null,
+                getFormattedTimestamp(),
+                "author");
     }
 
     private static String getFormattedTimestamp() {
