@@ -1,6 +1,7 @@
 package de.feuerwehrwetter.operationsdiary.core.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -19,5 +20,6 @@ public record DiaryEntry(
         MessageType messageType,
         String reporter,
         String receiver,
-        String author) {
+        String author,
+        List<SubEntryRelation> subEntryRelations) {
 }
